@@ -16,18 +16,18 @@ function dec2Binary(num: number) {
 }
 
 function bin2Decimal(num: number) {
-    if (num === 0) {
-        return "0"
-    }
-
-    let reserve = "";
+    let reserve = 0;
+    let i = 0;
     while (num > 0) {
-        reserve = (num % 10) + reserve;
+        reserve += ((num % 10) * Math.pow(2, i));
         num = Math.floor(num / 10);
+        i++;
     }
-
     return reserve
 }
+
+console.log(bin2Decimal(1001));
+
 
 
 const form = () => {
@@ -41,6 +41,12 @@ const form = () => {
         console.log(`Binary value of ${e.target.value} is : ` + binaryResualt);
     }
 
+    const handleDecimal = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let DecimalResualt = bin2Decimal(parseInt(e.target.value));
+        setResualt(String(DecimalResualt));
+        console.log(`Decimal value of ${e.target.value} is : ` + DecimalResualt);
+    }
+
 
     return (
         <section className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-50 w-4/5 lg:w-6/12 xl:w-4/12 flex flex-col bg-transparent'>
@@ -51,7 +57,7 @@ const form = () => {
                     name="binary"
                     id="binaryInput"
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                    onChange={(e) => handleBinary(e)}
+                    onChange={(e) => handleDecimal(e)}
                 />
             </div>
             <div className='flex flex-col my-4'>
@@ -61,6 +67,7 @@ const form = () => {
                     name="decimal"
                     id="decimalInput"
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    onChange={(e) => handleBinary(e)}
                 />
             </div>
             <div className='flex flex-col my-4'>
