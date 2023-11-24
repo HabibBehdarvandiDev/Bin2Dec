@@ -33,7 +33,7 @@ console.log(bin2Decimal(1001));
 const form = () => {
     const [binary, setBinary] = useState();
     const [decimal, setDecimal] = useState();
-    const [resualt, setResualt] = useState<string>();
+    const [resualt, setResualt] = useState<string>('');
 
     const handleBinary = (e: React.ChangeEvent<HTMLInputElement>) => {
         let binaryResualt = dec2Binary(parseInt(e.target.value));
@@ -42,11 +42,22 @@ const form = () => {
     }
 
     const handleDecimal = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseInt(e.target.value);
+        const inputValue = e.target.value;
 
-        const decimalResult = bin2Decimal(value);
-        setResualt(decimalResult.toString());
-        console.log(`Decimal value of ${value} is : ${decimalResult}`);
+        // Check if the input consists of only 0s and 1s
+        const isValidInput = /^[01]*$/.test(inputValue);
+
+        if (isValidInput) {
+            let binaryResult = dec2Binary(parseInt(inputValue, 2));
+            setResualt(binaryResult);
+            console.log(`Binary value of ${inputValue} is : ` + binaryResult);
+        } else {
+            // If the input is not valid, you can prevent updating the state or show an error message.
+            console.log("Invalid input. Please enter only 0s and 1s.");
+            alert("invalid Entry");
+            e.target.value = ""
+            setResualt('')
+        }
     }
 
 
