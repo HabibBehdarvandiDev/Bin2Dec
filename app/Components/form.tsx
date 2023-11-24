@@ -42,9 +42,11 @@ const form = () => {
     }
 
     const handleDecimal = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let DecimalResualt = bin2Decimal(parseInt(e.target.value));
-        setResualt(String(DecimalResualt));
-        console.log(`Decimal value of ${e.target.value} is : ` + DecimalResualt);
+        const value = parseInt(e.target.value);
+
+        const decimalResult = bin2Decimal(value);
+        setResualt(decimalResult.toString());
+        console.log(`Decimal value of ${value} is : ${decimalResult}`);
     }
 
 
@@ -78,6 +80,7 @@ const form = () => {
                     id="showResualt"
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                     disabled
+                    value={String(resualt)}
                 />
             </div>
         </section>
