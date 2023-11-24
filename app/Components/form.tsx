@@ -29,16 +29,17 @@ function bin2Decimal(num: number) {
     return reserve
 }
 
-const handleBinary = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
-}
-
-
 
 const form = () => {
     const [binary, setBinary] = useState();
     const [decimal, setDecimal] = useState();
-    const [resualt, setResualt] = useState();
+    const [resualt, setResualt] = useState<string>();
+
+    const handleBinary = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let binaryResualt = dec2Binary(parseInt(e.target.value));
+        setResualt(binaryResualt);
+        console.log(`Binary value of ${e.target.value} is : ` + binaryResualt);
+    }
 
 
     return (
